@@ -10,3 +10,4 @@ Here I post my assignments
 R assignments
 
 [R assignment 1](https://github.com/Kiewit/Assignments/blob/master/Graded_assignment1-Copy1.ipynb)
+[R assignment 2](https://github.com/Kiewit/Assignments/blob/master/Graded_assignment_2-Copy1.ipynb)

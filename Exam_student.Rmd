@@ -41,7 +41,7 @@ ggplot(df1, aes(x=group, y=V1)) +
   geom_boxplot()
 
 ```
-## Explanation
+#### Explanation
 I simply filled in the required information to make the requested boc plot.
 
 ## Assignment 1b
@@ -53,7 +53,7 @@ Show the summary statistics of the regression.
 reg1 <- lm(data=df1, response~V1)
 summary(reg1)
 ```
-## Explanation
+#### Explanation
 I made a regression as requested
 
 check if the assumptions of linear regression are met with the `gvlma()` function.
@@ -62,7 +62,7 @@ check if the assumptions of linear regression are met with the `gvlma()` functio
 gvlma(reg1)
 
 ```
-## Explanation
+#### Explanation
 I filled in reg1 in gvlma() to see if the assumptions are met. They are met.
 
 ## Assignment 1c
@@ -84,7 +84,7 @@ ggplot(df1,aes(x=Predictor,y=Response))+
   
 
 ```
-## Explanation
+#### Explanation
 I started with renaming V1 and response to Predictor and Response respectively. After which I made the desired graph using ggplot.
 
 # Assigment 2
@@ -106,6 +106,8 @@ map_municipal <-
   read.csv2("../Sourcedata/nld_municipal_map.csv", stringsAsFactors = FALSE, dec = ".")
 head(map_municipal)
 ```
+#### Explanation
+Copied from the notebook from week 6
 
 ## Assignment 2b
 
@@ -115,6 +117,8 @@ Now you can make an empty map of the Netherlands.
 AddMapLayer(MapPlot(), map_municipal)
 
 ```
+#### Explanation
+Copied from the notebook from week 6
 
 ## Assignment 2c
 
@@ -130,6 +134,9 @@ pc4_locations <-
 
 str(pc4_locations)
 ```
+#### Explanation
+read the file and turned X and Y into numerics
+
 
 ## Assignment 2d
 
@@ -141,6 +148,8 @@ Read in the school data
 schools <- read.csv2("../Sourcedata/schools.csv", stringsAsFactors = FALSE, dec = ".")
 head(schools)
 ```
+#### Explanation
+read the file and used head to get a better view of what was in it
 
 ### 2dii
 
@@ -158,6 +167,8 @@ schools1 <- schools
 head(schools1)
   
 ```
+#### Explanation
+just tried things and ended up with this and got something that looked like the desired result...
 
 ### 2diii
 
@@ -167,6 +178,8 @@ And then select the observations with DENOMINATIE is equal to "Rooms-Katholiek" 
 ```{r}
 school_loc <- full_join(pc4_locations,schools1,by='DENOMINATIE')
 ```
+#### Explanation
+tried something without succes and ran out of time
 
 ## Assignment 2e
 
@@ -178,3 +191,5 @@ AddMapLayer(MapPlot(), map_municipal) %>%
   AddPointsLayer(schools, sample_color, columnNameColor = "Type") 
 
 ```
+#### Explanation
+tried something without succes and ran out of time

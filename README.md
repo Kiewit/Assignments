@@ -15,6 +15,6 @@ R assignments
 
 Exams
 
-[Python exam]
+[Python exam](https://github.com/Kiewit/Assignments/blob/master/exam_june_7_2018.ipynb)
 
 [R exam]

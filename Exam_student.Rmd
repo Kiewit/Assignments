@@ -1,0 +1,180 @@
+---
+title: "Exam"
+author: "Mark Klik & Misja Mikkers"
+output: html_notebook
+---
+
+# Introduction
+
+The exam consists of 2 parts. In the first part, you have to run a regression, test if the assumptions of a linear regression model are met, and make 2 graphs.
+
+In the second part of the exam, you will have to make a map of Catholic and Protestant schools in the Netherlands.
+
+# Packages
+
+```{r}
+library(tidyverse)
+library(gvlma)
+```
+
+# Assignment 1
+
+## Data
+
+The data are given:
+
+```{r}
+set.seed(123)
+df1 <- as.data.frame(matrix(runif(1*50, min = 1, max = 10), ncol = 1)) %>%
+    mutate(epsilon = rnorm(50, mean = 0, sd = 2)) %>%
+    mutate(response = 3 - 2* V1  + epsilon) %>%
+    mutate(group = ifelse(V1 <= 5, 1,2))
+
+```
+
+## Asignment 1a
+
+The first assigment is to make boxplot using ggplot with group on the x-axis and V1 on the y-axis.
+
+```{r}
+ggplot(df1, aes(x=group, y=V1)) + 
+  geom_boxplot()
+
+```
+## Explanation
+I simply filled in the required information to make the requested boc plot.
+
+## Assignment 1b
+
+Run a regression with response variable as a function of V1.
+Show the summary statistics of the regression.
+
+```{r}
+reg1 <- lm(data=df1, response~V1)
+summary(reg1)
+```
+## Explanation
+I made a regression as requested
+
+check if the assumptions of linear regression are met with the `gvlma()` function.
+
+```{r}
+gvlma(reg1)
+
+```
+## Explanation
+I filled in reg1 in gvlma() to see if the assumptions are met. They are met.
+
+## Assignment 1c
+
+Make a scatterplot with:
+
+* V1 on the x-axis and the response on the y-axis
+* Include the regression line in red with confidence interval 
+* In a classic theme
+* The x-axis should be labeled "Predictor", the y-axis should be labeled ("Response")
+
+
+```{r}
+'Predictor'<-df1['V1']
+'Response'<-df1['response']
+ggplot(df1,aes(x=Predictor,y=Response))+
+  geom_point()+ theme_classic()+
+  geom_smooth(method='lm',formula=y~x, col=10)
+  
+
+```
+## Explanation
+I started with renaming V1 and response to Predictor and Response respectively. After which I made the desired graph using ggplot.
+
+# Assigment 2
+
+# Packages
+
+```{r}
+library(thematicmaps)
+library(tidyverse)
+```
+
+## Assignment 2a
+
+First you have to read in the file "nld_municipal_map.csv".
+Hint: Look at the notebook of week 6 about maps.
+
+```{r}
+map_municipal <- 
+  read.csv2("../Sourcedata/nld_municipal_map.csv", stringsAsFactors = FALSE, dec = ".")
+head(map_municipal)
+```
+
+## Assignment 2b
+
+Now you can make an empty map of the Netherlands.
+
+```{r}
+AddMapLayer(MapPlot(), map_municipal)
+
+```
+
+## Assignment 2c
+
+Read in the pc4 locations (nld_pc4_locations.csv).
+
+Hint: Don't forget the X and Y should be numeric variables!
+
+```{r}
+pc4_locations <- 
+  read.csv2("../Sourcedata/nld_pc4_locations.csv", stringsAsFactors = FALSE, dec = ".") %>%
+  mutate(X=as.numeric(as.character(X)))%>%
+  mutate(Y=as.numeric(as.character(Y)))
+
+str(pc4_locations)
+```
+
+## Assignment 2d
+
+### 2di
+
+Read in the school data
+
+```{r}
+schools <- read.csv2("../Sourcedata/schools.csv", stringsAsFactors = FALSE, dec = ".")
+head(schools)
+```
+
+### 2dii
+
+First, create a new dataframe schools1, which is equal to schools.
+
+As you see POSTCODE has a structure of (1234 AB). You should create a new variable PC4 that is equal to the first 4 numbers in POSTCODE
+
+Hint: Use the function `substr()`
+
+Then select the variables PC4 and DENOMINATIE
+
+```{r}
+schools1 <- schools 
+  schools1$PC4 <- substr('POSTCODE',1,4)
+head(schools1)
+  
+```
+
+### 2diii
+
+Create the dataframe school_loc as a join from pc4_locations and school1 that combines the columns from both data frames, but only keeps rows where the value in the pc4_locations column matches in both data frames.
+And then select the observations with DENOMINATIE is equal to "Rooms-Katholiek" or "Protestants-Christelijk"
+
+```{r}
+school_loc <- full_join(pc4_locations,schools1,by='DENOMINATIE')
+```
+
+## Assignment 2e
+
+Create a map of Catholic and Protestant schools in the Netherlands
+
+
+```{r}
+AddMapLayer(MapPlot(), map_municipal) %>%
+  AddPointsLayer(schools, sample_color, columnNameColor = "Type") 
+
+```

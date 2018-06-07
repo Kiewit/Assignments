@@ -17,7 +17,7 @@ Exams
 
 [Python exam](https://github.com/Kiewit/Assignments/blob/master/exam_june_7_2018.ipynb)
 
-[R exam](https://github.com/Kiewit/Assignments/blob/master/Exam_student.Rmd)
+[R exam](https://github.com/Kiewit/Assignments/blob/master/Exam_student.ipynb)
 
 ANR= u198094
 

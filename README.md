@@ -19,6 +19,9 @@ Exams
 
 [R exam](https://github.com/Kiewit/Assignments/blob/master/Exam_student.Rmd)
 
+Exams sep 21
+[Python exam]()
+
 ANR= u198094
 
 SNR= 2010702
